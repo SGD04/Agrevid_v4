@@ -169,13 +169,12 @@ a {
 
 /*  VIDEOS PLAYLIST
  ############################### */
-.vid-list-container {
+.vid-list-container{
     width: 70%;
-    overflow: hidden;
     margin-top: 5px;
     margin-left: 14%;
-    padding-bottom: 15px;
-    background-color: #FFE4E1;
+    background-color: #fff2f6;
+    overflow-y: hidden;
 }
 
 .vid-list {
@@ -183,6 +182,7 @@ a {
     position: relative;
     top:0;
     left: 0;
+    margin: auto;
 }
 
 .vid-item {
@@ -191,13 +191,14 @@ a {
     height: 148px;
     float: left;
     margin: 0;
-    padding: 10px;
+    padding: 5px;
 }
 
 .thumb {
     /*position: relative;*/
     overflow:hidden;
     height: 84px;
+    margin: 0;
 }
 
 .thumb img {
@@ -209,7 +210,7 @@ a {
 .vid-item .desc {
     color: #21A1D2;
     font-size: 15px;
-    margin-top:5px;
+    margin: auto;
 }
 
 .vid-item:hover {
@@ -221,37 +222,6 @@ a {
     position:relative;
     width: 100%;
 }
-
-.arrow-left {
-    color: #fff;
-    position: absolute;
-    background: #777;
-    padding: 15px;
-    left: -25px;
-    top: -130px;
-    z-index: 99;
-    cursor: pointer;
-}
-
-.arrow-right {
-    color: #fff;
-    position: absolute;
-    background: #777;
-    padding: 15px;
-    right: 155px;
-    top: -160px;
-    z-index:100;
-    cursor: pointer;
-}
-
-.arrow-left:hover {
-    background: #CC181E;
-}
-
-.arrow-right:hover {
-    background: #CC181E;
-}
-
 
 @media (max-width: 624px) {
     body {
@@ -265,19 +235,4 @@ a {
     .vid-list-container {
         padding-bottom: 20px;
     }
-}
-/* reposition left/right arrows */
-.arrows {
-    position:relative;
-    margin: 0 auto;
-    width:96px;
-}
-.arrow-left {
-    left: 0;
-    top: -17px;
-}
-
-.arrow-right {
-    right: 0;
-    top: -17px;
 }

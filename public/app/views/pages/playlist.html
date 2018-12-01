@@ -1,1 +1,56 @@
-<h1>ici les playlists</h1>
+
+<div >
+    <div>
+        <div>
+            <button type="button" class="btn btn-primary" style="width:25%;" data-toggle="modal"
+                    data-target="#addplaylist">
+                Add New Playlist
+            </button>
+        </div>
+
+        <!-- THE PLAYLIST -->
+        <div ng-repeat="x in array">
+            <h2>Titre de la playlist : {{x.namePlaylist}} </h2>
+            <button ng-click="playlist.deletePlaylist(x.namePlaylist)" class="btn btn-success"> delete playlist</button>
+            <div class="vid-list-container"  >
+                <div class="vid-list" >
+                    <div class="vid-item" ng-repeat="y in x.playlist" >
+                        <div ng-Click="playlist.goToVideoPlaylist(x,y)">
+                            <div class="thumb"><img src="http://img.youtube.com/vi/{{y}}/0.jpg"></div>
+                            <div class="desc"> {{y}} </div>
+                        </div>
+                        <button ng-click="playlist.deleteVideo(x,y)" class="close"> X </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="addplaylist" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
+             aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-center">Add New Playlist
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </h3>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="input-group container">
+                            <div class="text-left">
+                                <form class="form-signin" method="post" ng-submit="playlist.createUserPlaylist()">
+                                    new playlist : <input type="text" name="namePlaylist" ng-model="playlist.playlistData.namePlaylist">
+                                    <button type="submit" class="btn btn-success">Add Playlist</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

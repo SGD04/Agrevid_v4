@@ -1,0 +1,26 @@
+<div style="overflow-y: auto;height: 500px;margin-left: 700px;">
+    <div   class="thumbnail clearfix" ng-repeat="x in selectedPlaylist.playlist" style="width:400px;">
+        <img src="http://img.youtube.com/vi/{{x}}/0.jpg" ng-click="" alt="ALT NAME" class="pull-left span2 clearfix" style='width:100px;height:100px;   margin-right:10px'>
+        <div class="caption" class="pull-left">
+
+            <h4>
+                <a href="#" ng-click="playlist.goToVideoPlaylist(selectedPlaylist,x)" >{{x}}</a>
+            </h4>
+            <small><b>source: </b>Youtube</small>
+            <button ng-click="playlist.deleteVideo(selectedPlaylist.namePlaylist,x)" class="close"> X </button>
+        </div>
+    </div>
+</div>
+<div class="vid-container" style="position: fixed;
+  width: 600px;
+  height: 200px;
+  left: 50%;
+  top: 10%;
+  margin-left: -600px;">
+    <div style="display: inline-block">
+        <h3 style="margin-top: 0px">Titre de la playlist : {{selectedPlaylist.namePlaylist}} </h3>
+        <button ng-click="playlist.deletePlaylist(selectedPlaylist.namePlaylist)" class="btn btn-success"> delete playlist</button>
+    </div>
+    <h3 style="margin-top: 5px"> >{{selectedVideo}}</h3>
+    <video id="vid_frame" controls controlsList="nodownload" src="{{'/apiVideo/watchYoutubeVideo/'+selectedVideo}}" type="video/mp4" frameborder="0" width="660" height="375"></video>
+</div>

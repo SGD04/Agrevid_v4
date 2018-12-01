@@ -29,11 +29,14 @@
     <script type="text/javascript" src="app/services/authService.js"></script>
     <script type="text/javascript" src="app/services/userService.js"></script>
     <script type="text/javascript" src="app/services/videoService.js"></script>
+    <script type="text/javascript" src="app/services/playlistService.js"></script>
 
 
     <script type="text/javascript" src="app/controllers/mainController.js"></script>
     <script type="text/javascript" src="app/controllers/userCtrl.js"></script>
     <script type="text/javascript" src="app/controllers/videoCtrl.js"></script>
+    <script type="text/javascript" src="app/controllers/playlistCtrl.js"></script>
+
 
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
@@ -41,7 +44,7 @@
 </head>
 <body ng-controller="MainController as main">
 <div ng-controller="VideoController as video">
-
+<div ng-controller="playlistCtrl as playlist">
 <header>
     <div class="navbar navbar-default" >
         <div class="container">
@@ -63,7 +66,10 @@
                     </form>
                 </li>
                 <li ng-if="main.loggedIn"><a href="#">Hello {{main.user.name}}</a></li>
-                <li ng-if="main.loggedIn"><a href="/playlist">Playlists</a></li>
+
+                <!--<li ng-if="main.loggedIn"><a href="/playlist" > Playlists</a></li>-->
+                <li ng-if="main.loggedIn"><a href="#" ng-click="playlist.goToPlaylist()" >Playlists</a></li>
+
                 <li ng-if="main.isAdmin && main.loggedIn"><a href="/administration">Administration</a></li>
                 <li ng-if="main.loggedIn"><a href="/gestion">Gestion de compte</a></li>
                 <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Déconnexion</a></li>
@@ -79,7 +85,7 @@
 <main class="container">
     <div ng-view></div>
 </main>
-
+</div>
 </div>
 </body>
 </html>

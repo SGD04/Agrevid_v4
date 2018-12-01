@@ -24,6 +24,10 @@ angular.module('appRoutes',['ngRoute'])
             templateUrl: 'app/views/pages/playlist.html'
         })
 
+        .when('/videoPlaylist',{
+            templateUrl: 'app/views/pages/videoPlaylist.html'
+        })
+
         .when('/logout',{
             templateUrl: 'app/views/pages/logout.html'
         })
@@ -39,4 +43,4 @@ angular.module('appRoutes',['ngRoute'])
         .otherwise('/');
 
     $locationProvider.html5Mode(true);
-})
+});

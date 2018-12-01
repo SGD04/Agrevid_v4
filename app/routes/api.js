@@ -1,6 +1,9 @@
 const User = require('../models/user');
 const UserLog = require('../models/userLog');
 const UserHistory = require('../models/userHistory');
+const Playlist = require('../models/userPlaylist');
+
+
 let config = require('../../config');
 let bcrypt = require('bcrypt-nodejs');
 let validator = require('email-validator');
@@ -390,6 +393,80 @@ module.exports = function (app, express, io) {
         })
     });
 
+
+    //-----------------------------------------------------------
+    //Playlist function
+    //-----------------------------------------------------------
+
+
+    api.post('/getPlaylist', function (req, res) {
+        Playlist.find({idUser: req.body.idUser}, function (err, userPlaylist) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(userPlaylist);
+            res.json(userPlaylist);
+        });
+    });
+
+    //Adds a new playlist
+    api.post('/createPlaylist',function (req, res) {
+        const playlistData = req.body;
+        const newPlaylist = new Playlist(playlistData);
+
+        newPlaylist.save(function (err) {
+            if (err) {
+                console.log("Error:" + err);
+                return;
+            }
+            else {
+                //console.log("New Playlist created : " + playlistData.namePlaylist + " by user : " + playlistData.idUser);
+                //res.send(playlistData);
+            }
+        });
+    });
+
+    //Delete a playlist
+    api.post('/deletePlaylist',function (req, res) {
+        Playlist.deleteOne({idUser: req.body.idUser, namePlaylist: req.body.namePlaylist }, function (err) {
+            if (err)
+                console.log(err);
+            else
+                res.json({message: 'Playlist deleted'});
+        });
+    });
+
+
+    //Adds a new video to the playlist
+    api.post('/addVideoPlaylist',function (req, res) {
+        Playlist.findOneAndUpdate({idUser: req.body.idUser ,namePlaylist: req.body.namePlaylist},
+            {$addToSet: {playlist: req.body.url}},
+            function (err, playlist) {
+                if (err) {
+                    res.send(err);
+                }
+                else {
+                    console.log(req.body.url + " added to " + req.body.namePlaylist);
+                    res.send(playlist);
+                }
+            });
+    });
+
+    //Delete a video from playlist
+    api.post('/deleteVideoPlaylist',function (req, res) {
+        Playlist.findOneAndUpdate({ idUser: req.body.idUser, namePlaylist: req.body.namePlaylist},
+            {$pull: {playlist: req.body.url}},
+            function (err, playlist) {
+                if (err) {
+                    res.send(err);
+                }
+                else {
+                    console.log(req.body.url + " removed from " + req.body.namePlaylist);
+                    res.send(playlist);
+                }
+            });
+    });
 
         return api
 };
